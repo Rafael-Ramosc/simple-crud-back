@@ -12,13 +12,13 @@ pub struct AppState {
     db: Pool<Postgres>,
 }
 
-// to start the server: cargo watch -q -c -w src/ -x run
-
 #[actix_web::main]
 async fn main() -> std::io::Result<()> {
     if std::env::var_os("RUST_LOG").is_none() {
         std::env::set_var("RUST_LOG", "actix_web=info");
     }
+    println!("Establishing connection...");
+    
     dotenv().ok();
     env_logger::init();
 
@@ -38,7 +38,8 @@ async fn main() -> std::io::Result<()> {
         }
     };
 
-    println!("🚀 Server started successfully");
+    println!("Server started successfully");
+    println!("Happy Navigating! 🤙");
 
     HttpServer::new(move || {
         let cors = Cors::default()
