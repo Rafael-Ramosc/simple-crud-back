@@ -15,7 +15,7 @@ async fn health_checker_handler() -> impl Responder {
     HttpResponse::Ok().json(json!({"status": "success","message": MESSAGE}))
 }
 
-#[get("/mensagem")]
+#[get("/messages")]
 pub async fn mensagem_list_handler(
     opts: web::Query<FilterOptions>,
     data: web::Data<AppState>,
@@ -43,12 +43,12 @@ pub async fn mensagem_list_handler(
     let json_response = serde_json::json!({
         "status": "success",
         "results": mensagem.len(),
-        "notes": mensagem
+        "mensagem": mensagem
     });
     HttpResponse::Ok().json(json_response)
 }
 
-#[post("/mensagem/")]
+#[post("/message/")]
 async fn create_mensagem_handler(
     body: web::Json<CreateMensagemSchema>,
     data: web::Data<AppState>,
@@ -83,9 +83,9 @@ async fn create_mensagem_handler(
     }
 }
 
-#[get("/mensagem/{id}")]
+#[get("/message/{id}")]
 async fn get_mensagem_handler(
-    path: web::Path<uuid::Uuid>,
+    path: web::Path<i32>,
     data: web::Data<AppState>,
 ) -> impl Responder {
     let mensagem_id = path.into_inner();

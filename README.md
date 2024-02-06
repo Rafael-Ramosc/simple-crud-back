@@ -1,2 +1,3 @@
-
+## Welcome
+to start the server: cargo watch -q -c -w src/ -x run
 
